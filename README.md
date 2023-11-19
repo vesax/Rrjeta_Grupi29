@@ -2,10 +2,10 @@
 Detyra e dyte ne lenden e Rrjetave Kompjuterike: Krijimi i Client & Server side, Protokolli: UDP, Gjuha programuese:Java.
 
 Anetaret e grupit 29:
- -Verona Kabashi
- -Vesa Zhitia
- -Vijola Neziri
- -Visar Gjema.
+ Verona Kabashi,
+ Vesa Zhitia,
+ Vijola Neziri,
+ Visar Gjema.
 
 Kerkesat e projektit:
 

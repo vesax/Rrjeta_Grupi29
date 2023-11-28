@@ -63,8 +63,6 @@ public class UDPServer {
                 return handleWriteRequest(parts[1], parts[2]);
             case "UPLOAD":
                 return handleUploadRequest(parts[1], parts[2]);
-            case "BROWSE":
-                return browseDirectory(parts[1]);
             default:
                 return "Unknown request";
         }

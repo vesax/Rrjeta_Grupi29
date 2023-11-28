@@ -63,10 +63,11 @@ public class UDPServer {
                 return handleWriteRequest(parts[1], parts[2]);
             case "UPLOAD":
                 return handleUploadRequest(parts[1], parts[2]);
+            case "BROWSE":
+                return browseDirectory(parts[1]);
             default:
                 return "Unknown request";
         }
-        return command;
     }
 
     private static String handleReadRequest(String fileName) {
@@ -110,5 +111,24 @@ public class UDPServer {
             return "Error uploading the file";
         }
     }
+    private static String browseDirectory(String directoryPath) {
+        try {
+            StringBuilder content = new StringBuilder();
 
+            Files.list(Paths.get(directoryPath)).forEach(path -> {
+                if (Files.isDirectory(path)) {
+                    content.append("[Directory] ").append(path.getFileName()).append("\n");
+                } else {
+                    content.append("[File] ").append(path.getFileName()).append("\n");
+                }
+            });
+
+            return content.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Error browsing directory";
+        }
+    }
 }
+
+

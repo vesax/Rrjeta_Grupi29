@@ -103,4 +103,14 @@ public class UDPServer {
             return "Error writing to the file";
         }
     }
+    private static String handleUploadRequest(String fileName, String content) {
+        try {
+            Files.write(Paths.get(fileName), content.getBytes());
+            return "File uploaded successfully";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Error uploading the file";
+        }
+    }
+
 }

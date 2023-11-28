@@ -55,6 +55,18 @@ public class UDPServer {
         switch (command) {
             case "READ":
                 return handleReadRequest(parts[1]);
+            case "LIST":
+                return listFiles();
+            case "EXECUTE":
+                return executeCommand(parts[1]);
+            case "WRITE":
+                return handleWriteRequest(parts[1], parts[2]);
+            case "UPLOAD":
+                return handleUploadRequest(parts[1], parts[2]);
+            case "BROWSE":
+                return browseDirectory(parts[1]);
+            default:
+                return "Unknown request";
         }
         return command;
     }
@@ -66,6 +78,29 @@ public class UDPServer {
         } catch (IOException e) {
             e.printStackTrace();
             return "Error reading the file";
+        }
+    }
+    private static String listFiles() {
+        StringBuilder fileList = new StringBuilder();
+        try {
+            Files.list(Paths.get(".")).forEach(path -> fileList.append(path.getFileName()).append("\n"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Error listing files";
+        }
+        return fileList.toString();
+    }
+    private static String executeCommand(String command) {
+        return "Executing command: " + command;
+    }
+
+    private static String handleWriteRequest(String fileName, String content) {
+        try {
+            Files.write(Paths.get(fileName), content.getBytes());
+            return "File written successfully";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Error writing to the file";
         }
     }
 }

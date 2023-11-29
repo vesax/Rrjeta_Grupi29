@@ -25,20 +25,21 @@ public class UDPServer {
 
                 System.out.println("Client [" + clientAddress.getHostAddress() + ":" + clientPort + "] says: " + clientMessage);
 
-                // Create a separate thread to handle each client request
+
                 Thread requestHandler = new Thread(() -> {
-                    // Process the client's request
+
                     String response = processRequest(clientMessage);
 
-                    // Prepare data for response
+
                     byte[] sendData = response.getBytes();
                     DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, clientAddress, clientPort);
 
-                    // Send the response to the client
+
                     try {
                         serverSocket.send(sendPacket);
                     } catch (IOException e) {
                         e.printStackTrace();
+
                     }
                 });
 
